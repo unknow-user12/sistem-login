@@ -23,10 +23,13 @@ Route::get('/register', function () {
 Route::post('/register', [AuthController::class, 'register']);
 
 
+Route::middleware('auth.manual')->group(function () {
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 });
+
 
 
 Route::post('/logout', [AuthController::class, 'logout']);
