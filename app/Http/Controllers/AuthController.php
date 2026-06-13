@@ -22,7 +22,43 @@ class AuthController extends Controller
         'password' => Hash::make($request->password),
     ]);
 
-    return redirect('/')
+    return redirect('/dashboard')
             ->with('success', 'Register berhasil');
+}
+
+    public function login(Request $request)
+{
+    $user = User::where(
+        'email',
+        $request->email
+    )->first();
+
+    if (!$user) {
+
+        return back()->with(
+            'error',
+            'Email tidak ditemukan'
+        );
+    }
+
+    if (
+        !Hash::check(
+            $request->password,
+            $user->password
+        )
+    ) {
+
+        return back()->with(
+            'error',
+            'Password salah'
+        );
+    }
+
+    session([
+        'user_id' => $user->id,
+        'username' => $user->name
+    ]);
+
+    return redirect('/dashboard');
 }
 }
