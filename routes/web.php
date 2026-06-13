@@ -9,20 +9,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
-Route::post('/login', [AuthController::class, 'login']);
-
-
-
-
-Route::get('/register', function () {
-    return view('auth.register');
-});
-Route::post('/register', [AuthController::class, 'register']);
-
-
 Route::middleware('auth.manual')->group(function () {
 
     Route::get('/dashboard', function () {
@@ -30,6 +16,22 @@ Route::middleware('auth.manual')->group(function () {
     });
 });
 
+
+
+Route::middleware('guest.manual')->group(function () {
+
+    Route::get('/login', function () {
+        return view('auth.login');
+    });
+
+    Route::post('/login', [AuthController::class, 'login']);
+
+    Route::get('/register', function () {
+        return view('auth.register');
+    });
+
+    Route::post('/register', [AuthController::class, 'register']);
+});
 
 
 Route::post('/logout', [AuthController::class, 'logout']);
