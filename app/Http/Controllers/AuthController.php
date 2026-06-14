@@ -20,6 +20,7 @@ class AuthController extends Controller
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
+        'role' => 'user',
     ]);
 
     return redirect('/dashboard')
@@ -56,7 +57,8 @@ class AuthController extends Controller
 
     session([
         'user_id' => $user->id,
-        'username' => $user->name
+        'username' => $user->name,
+        'role' => 'admin'
     ]);
 
     return redirect('/dashboard');

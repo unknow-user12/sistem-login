@@ -16,6 +16,18 @@ Route::middleware('auth.manual')->group(function () {
     });
 });
 
+Route::get('/admin', function () {
+
+    return view('dashboard');
+
+})->middleware('role:admin');
+
+
+Route::get('/user', function () {
+
+    return view('dashboard');
+
+})->middleware('role:user');
 
 
 Route::middleware('guest.manual')->group(function () {

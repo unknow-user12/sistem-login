@@ -1,10 +1,12 @@
-<h1>Dashboard</h1>
+<@if(session('role') == 'admin')
 
-<p>
-    Selamat datang,
-    {{ session('username') }}
-</p>
+    <h2>Dashboard Admin</h2>
 
+@else
+
+    <h2>Dashboard User</h2>
+
+@endif
 <form action="/logout" method="POST">
     @csrf
 
