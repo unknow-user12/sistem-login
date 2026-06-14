@@ -58,7 +58,7 @@ class AuthController extends Controller
     session([
         'user_id' => $user->id,
         'username' => $user->name,
-        'role' => 'admin'
+        'role' => $user->role
     ]);
 
     return redirect('/dashboard');
